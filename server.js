@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const seedCompanies = require('./utils/seedCompanies');
+const seedAdmin = require('./utils/seedAdmin');
 
 // Load environment variables
 dotenv.config();
@@ -78,6 +79,9 @@ connectDB()
   .then(() => {
     // Seed initial companies if database is empty
     seedCompanies().catch(console.error);
+    
+    // Create admin user if doesn't exist
+    seedAdmin().catch(console.error);
     
     // Start server
     const PORT = process.env.PORT || 5000;
